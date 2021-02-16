@@ -25,7 +25,7 @@ SECRET_KEY = '9t7&=s0$utc%+$-c1q6lp30mc24pc#2)vn2c7*b@x!w713l$&%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://whispering-wave-16725.herokuapp.com/', 'localhost', '127.0.0.1']
 
 
 # Application definition
