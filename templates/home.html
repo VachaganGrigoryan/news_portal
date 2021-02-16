@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}News - Home Page{% endblock %}
+
+{% block content %}
+<h3 class="pb-4 mb-4 fst-italic border-bottom">
+The All News
+</h3>
+
+{% for post in post_list %}
+      <article class="blog-post">
+        <h2 class="blog-post-title">
+          <a href="{{ post.get_absolute_url }}">
+            {{ post.title|upper }}
+          </a>
+        </h2>
+        <p class="blog-post-meta">
+            {{ post.publish }} by <a href="#">{{ post.author }}</a>
+            {% for category in post.categories.all %}
+                <a href="{{ category.get_absolute_url }}">
+                    <span class="badge badge-primary">{{ category.name }}</span>
+                </a>
+            {% endfor %}
+        </p>
+        {{ post.content|safe|truncatewords:"100" }}
+      </article>
+{% endfor %}
+
+{% if post_list.has_other_pages %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if post_list.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ post_list.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+    {% for i in post_list.paginator.page_range %}
+      {% if post_list.number == i %}
+        <li class="active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if post_list.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ post_list.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+{% endblock %}

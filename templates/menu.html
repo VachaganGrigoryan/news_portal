@@ -1,0 +1,11 @@
+
+
+<ul class="navbar-nav">
+   {% for item in menu_items %}
+     <li class="nav-item {% if item.get_absolute_url == path %}active{% endif%}">
+         <a class="nav-link" href="{{ item.get_absolute_url }}">
+            {{ item.name|upper }} {% if item.get_absolute_url == path %}<sapn class="sr-only">(current)</sapn>{% endif%}
+         </a>
+      </li>
+   {% endfor %}
+</ul>
