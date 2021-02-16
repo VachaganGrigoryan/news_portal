@@ -128,5 +128,6 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'auth.User'
 DEFAULT_MENUS = {"Top Menu": "navbar"}
+DISABLE_COLLECTSTATIC=1
 
 
