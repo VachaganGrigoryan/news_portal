@@ -27,7 +27,7 @@ def home(request):
 
 
 def post_detail(request, pk: int, slug: str):
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(Post, pk=pk, slug=slug)
 
     template = loader.get_template('blog/detail.html')
     context = {
@@ -35,3 +35,7 @@ def post_detail(request, pk: int, slug: str):
     }
     return HttpResponse(template.render(context, request))
 
+
+def handle_404(request, exception=None):
+    template = loader.get_template('404.html')
+    return HttpResponse(template.render({}, request), status=404)

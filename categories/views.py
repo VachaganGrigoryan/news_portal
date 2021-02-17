@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -8,7 +8,7 @@ from blog.models import Post
 
 
 def category_detail(request, pk: int, slug: str):
-    category = get_object_or_404(Category, pk=pk)
+    category = get_object_or_404(Category, pk=pk, slug=slug)
     post_list = Post.objects.filter(categories=pk).order_by('-publish')
     page = request.GET.get('page', 1)
 
